@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol,
+menu {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.checked {
+    text-decoration: line-through;
+}
