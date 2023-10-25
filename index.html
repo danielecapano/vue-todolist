@@ -9,10 +9,11 @@
   <body>
     <div id="app">
       <h1>TODO LIST</h1>
-      <input type="text" name="" id="" />
-      <button>Aggiungi</button>
+      <input type="text" v-model="inputTask" @keyup.enter="addTask" />
+      <button @click="addTask">Aggiungi</button>
       <ul class="list">
         <li
+          @click="taskChecked(index)"
           class="item"
           :class="todo.done === true ? 'checked' : ''"
           v-for="(todo, index) in todos"

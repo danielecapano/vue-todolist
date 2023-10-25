@@ -3,21 +3,35 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      todos: [
-        {
-          text: "Fare i compiti",
-          done: false,
-        },
-        {
-          text: "Fare la spesa",
-          done: true,
-        },
-        {
-          text: "Fare il bucato",
-          done: false,
-        },
-      ],
+      todos: [],
+
+      indexTask: 0,
+
+      inputTask: "",
     };
+  },
+
+  methods: {
+    addTask() {
+      const item = {
+        text: "",
+        done: false,
+      };
+      item.text = this.inputTask;
+
+      if (this.inputTask !== "") {
+        this.todos.unshift(item);
+      }
+      this.inputTask = "";
+      console.log(this.todos);
+    },
+    taskChecked(indexTask) {
+      if (this.todos[indexTask].done === false) {
+        this.todos[indexTask].done = true;
+      } else {
+        this.todos[indexTask].done = false;
+      }
+    },
   },
   mounted() {
     console.log("VUE OK");
