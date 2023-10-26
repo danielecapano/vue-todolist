@@ -4,23 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vue ToDo List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div id="app">
-      <h1>TODO LIST</h1>
-      <input type="text" v-model="inputTask" @keyup.enter="addTask" />
-      <button @click="addTask">Aggiungi</button>
-      <ul class="list">
-        <li
-          @click="taskChecked(index)"
-          class="item"
-          :class="todo.done === true ? 'checked' : ''"
-          v-for="(todo, index) in todos"
-        >
-          {{todo.text}}
-        </li>
-      </ul>
+    <div class="container" id="app">
+      <h1 class="title">TODO LIST</h1>
+      <div class="new-task">
+        <input
+          type="text"
+          placeholder="Scrivi qui le cose da fare"
+          v-model="inputTask"
+          @keyup.enter="addTask"
+        />
+        <button class="btn-add" @click="addTask">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+      <p :class="classList">Inserire almeno 5 caratteri</p>
+      <div class="list-wrapper" v-if="todos.length > 0">
+        <ul class="list">
+          <li class="item" v-for="(todo, index) in todos">
+            <div class="task" :class="todo.done === true ? 'checked' : ''">
+              {{todo.text}}
+            </div>
+            <div class="option-task">
+              <span @click.stop="taskChecked(index)"
+                ><i class="fa-solid fa-check"></i
+              ></span>
+              <span @click.stop="removeTask(index)"
+                ><i class="fa-solid fa-trash"></i
+              ></span>
+            </div>
+          </li>
+        </ul>
+        <button class="reset" @click="todos = []">Cancella tutto</button>
+      </div>
+      <!-- <div class="task-empty" v-else>
+        <h3>La tua lista è vuota</h3>
+      </div> -->
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/app.js"></script>

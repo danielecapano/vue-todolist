@@ -5,25 +5,27 @@ createApp({
     return {
       todos: [],
 
-      indexTask: 0,
-
       inputTask: "",
+      classList: "small hidden",
     };
   },
 
   methods: {
     addTask() {
       const item = {
-        text: "",
+        text: this.inputTask.trim(),
         done: false,
       };
-      item.text = this.inputTask;
+      //   item.text = this.inputTask.trim();
+      console.log(item.text.length);
 
-      if (this.inputTask !== "") {
+      if (item.text.length >= 5) {
+        this.classList = "small hidden";
         this.todos.unshift(item);
+      } else {
+        this.classList = "small";
       }
       this.inputTask = "";
-      console.log(this.todos);
     },
     taskChecked(indexTask) {
       if (this.todos[indexTask].done === false) {
@@ -31,6 +33,9 @@ createApp({
       } else {
         this.todos[indexTask].done = false;
       }
+    },
+    removeTask(indexTask) {
+      this.todos.splice(indexTask, 1);
     },
   },
   mounted() {
